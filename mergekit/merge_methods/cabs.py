@@ -1,5 +1,6 @@
 import logging
 from typing import Any, Dict, List, Optional, Tuple
+import math
 
 import torch
 from pydantic import (  # Keep BaseModel for CABSMerge for now if registry expects instance
@@ -293,9 +294,7 @@ class CABSTask(Task[torch.Tensor]):
                 if val.is_integer():
                     return int(val)
                 else:
-                    logging.warning(
-                        f"    Cannot convert per-model {name} '{val}' to int as it's a non-whole float."
-                    )
+                    return int(math.floor(val + 0.5))
                     return None
             if val is not None:  # Log if it's some other unexpected type
                 logging.warning(
