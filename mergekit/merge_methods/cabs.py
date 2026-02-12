@@ -32,10 +32,10 @@ def prune_n_m_structural(
     num_elements = flat_tensor_orig_values.numel()
     if m_val <= 0:
         logging.error(f"Tensor {original_shape}: m_val ({m_val}) must be positive.")
-        return tensor.clone(), torch.ones_like(tensor, dtype=torch.bool)
+        return tensor.clone(), torch.zeros_like(tensor, dtype=torch.bool)
     if n_val < 0 or n_val > m_val:
         logging.error(f"Tensor {original_shape}: n_val ({n_val}) invalid.")
-        return tensor.clone(), torch.ones_like(tensor, dtype=torch.bool)
+        return tensor.clone(), torch.zeros_like(tensor, dtype=torch.bool)
     if n_val == 0:
         return torch.zeros_like(tensor), torch.zeros_like(tensor, dtype=torch.bool)
     if n_val == m_val:
